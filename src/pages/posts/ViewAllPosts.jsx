@@ -10,6 +10,7 @@ function ViewAllPosts() {
       <Post />
       <Post />
       <Post />
+      <Post />
     </>
   );
 }

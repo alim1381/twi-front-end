@@ -4,16 +4,23 @@ import ViewAllPosts from "./pages/posts/ViewAllPosts";
 
 const router = createBrowserRouter([
   {
-    path:'/',
-    element : <MainLayout />,
-    children : [
+    path: "/",
+    element: <MainLayout />,
+    children: [
       {
-        path : 'posts',
-        element : <ViewAllPosts />
-      }
-    ]
-
-  }  
+        path: "posts",
+        element: <ViewAllPosts />,
+      },
+      {
+        path: "messages",
+        element: <ViewAllPosts />,
+      },
+      {
+        path: "profile",
+        element: <ViewAllPosts />,
+      },
+    ],
+  },
 ]);
 
 export default router;

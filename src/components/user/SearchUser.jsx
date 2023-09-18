@@ -4,10 +4,10 @@ import SearchUserItem from "./SearchUserItem";
 function SearchUser() {
   return (
     <>
-      <div class="relative text-gray-300 max-w-sm p-5 pb-0 mr-16 max-xl:mr-8">
-        <button type="submit" class="absolute ml-4 mt-3 mr-4">
+      <div className="relative text-gray-300 max-w-sm p-5 pb-0 mr-16 max-xl:mr-8">
+        <button type="submit" className="absolute ml-4 mt-3 mr-4">
           <svg
-            class="h-4 w-4 fill-current"
+            className="h-4 w-4 fill-current"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
             version="1.1"
@@ -27,31 +27,31 @@ function SearchUser() {
           type="search"
           name="search"
           placeholder="Search Twitter"
-          class="bg-neutral-900 h-10 px-10 pr-5 w-full rounded-full text-sm focus:outline-none bg-purple-white shadow border-0"
+          className="bg-neutral-900 h-10 px-10 pr-5 w-full rounded-full text-sm focus:outline-none bg-purple-white shadow border-0"
         />
       </div>
 
       {/* <!--third-people suggetion to follow section--> */}
 
-      <div class="max-w-sm rounded-lg bg-neutral-900 overflow-hidden shadow-lg m-4 mr-20 max-xl:mr-8">
-        <div class="flex">
-          <div class="flex-1 m-2">
-            <h2 class="px-4 py-2 text-xl w-48 font-semibold text-white">
+      <div className="max-w-sm rounded-lg bg-neutral-900 overflow-hidden shadow-lg m-4 mr-20 max-xl:mr-8">
+        <div className="flex">
+          <div className="flex-1 m-2">
+            <h2 className="px-4 py-2 text-xl w-48 font-semibold text-white">
               Which user ?
             </h2>
           </div>
         </div>
 
-        <hr class="border-gray-600" />
+        <hr className="border-gray-600" />
         <SearchUserItem />
         <SearchUserItem />
         <SearchUserItem />
 
         {/* <!--show more--> */}
 
-        <div class="flex">
-          <div class="flex-1 p-4">
-            <h2 class="px-4 ml-2 w-48 font-bold text-blue-400">Show more</h2>
+        <div className="flex">
+          <div className="flex-1 p-4">
+            <h2 className="px-4 ml-2 w-48 font-bold text-blue-400">Show more</h2>
           </div>
         </div>
       </div>
