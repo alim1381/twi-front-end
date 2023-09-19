@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import LoginSideContent from "../../components/side/LoginSideContent";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import LoginFormInput from "../../components/input/LoginFormInput";
 import { useForm } from "react-hook-form";
 import { httpService } from "../../core/http-service";
@@ -15,6 +15,7 @@ function Login() {
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
+  const {state} = useLocation();
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -24,24 +25,26 @@ function Login() {
     setLoading(true);
     setErrorMessage(null);
     httpService
-      .post("/auth/login", data , {headers : {
-        "Content-Type": "application/x-www-form-urlencoded"
-      }})
+      .post("/auth/login", data, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      })
       .then((response) => {
-        document.cookie = `token=${response.data.token}`;
-        document.cookie = `refreshToken=${response.data.refreshToken}`;
+        document.cookie = `token=${response.data.token};path=/`;
+        document.cookie = `refreshToken=${response.data.refreshToken};path=/`;
         dispatch(userLoginSuccess(response.data));
         setLoading(false);
         setErrorMessage(null);
-        navigate("/posts");
+        navigate(state ? state : "/");
       })
       .catch((err) => {
         setLoading(false);
         console.log(err);
         setErrorMessage(
-          err.response?.data
+          err.response?.data && err.response?.status !== 500
             ? err.response.data?.message
-            : "Error in login operation"
+            : "There is a problem communicating"
         );
       });
   };
