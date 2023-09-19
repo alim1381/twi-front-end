@@ -5,6 +5,7 @@ import Login from "./pages/register/Login";
 import Register from "./pages/register/Register";
 import PriveteRoutes from "./auth/PriveteRoutes";
 import RegistersRoutes from "./auth/RegistersRoutes";
+import Logout from "./pages/logout/Logout";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,12 @@ const router = createBrowserRouter([
         path: "profile",
         element: <ViewAllPosts />,
       },
+      {
+        path: "logout",
+        element: <Logout />,
+      },
+
+      // redirects
       {
         path: "*",
         element: <Navigate to={"/"} />,

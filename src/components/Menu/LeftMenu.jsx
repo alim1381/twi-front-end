@@ -22,6 +22,11 @@ function LeftMenu() {
       path: "/profile",
       icon: <CgProfile color="white" className="mr-4 h-6 w-6 " />,
     },
+    {
+      text: "Logout",
+      path: "/logout",
+      icon: <BiLogOut color="white" className="mr-4 h-6 w-6 " />,
+    },
   ];
   return (
     <>
@@ -32,8 +37,9 @@ function LeftMenu() {
         </a>
       </div>
       <nav className="mt-5 px-2">
-        {listItems.map((item) => (
+        {listItems.map((item, index) => (
           <Link
+            key={index}
             to={item.path}
             className={
               pathname === item.path
@@ -44,13 +50,6 @@ function LeftMenu() {
             {item.text}
           </Link>
         ))}
-
-        <Link
-          to="/profile"
-          className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-neutral-900">
-          <BiLogOut color="white" className="mr-4 h-6 w-6 " />
-          Logout
-        </Link>
       </nav>
       <UserIconAndName />
     </>
