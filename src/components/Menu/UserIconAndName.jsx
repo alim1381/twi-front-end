@@ -6,7 +6,9 @@ function UserIconAndName() {
     <div className="flex-shrink-0 flex hover:bg-blue-00 rounded-full p-4 mt-6 mr-2">
       <a href="#" className="flex-shrink-0 group block">
         <div className="flex items-center">
-          <UserAvatar avatar={null} />
+          <div className="w-10 h-10">
+            <UserAvatar avatar={null} />
+          </div>
           <div className="ml-3">
             <p className="text-base leading-6 font-medium text-white">
               Ali Moayedi

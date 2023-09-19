@@ -7,16 +7,19 @@ import { httpService } from "../../core/http-service";
 import { useDispatch } from "react-redux";
 import Loader from "../../components/loader/Loader";
 import { userLoginSuccess } from "../../redux/register/loginAction";
+import SelectAvatarImage from "../../components/userIcon/SelectAvatarImage";
 
 function Register() {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm();
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [avatarImage, setAvatarImage] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -24,22 +27,18 @@ function Register() {
     setLoading(true);
     setErrorMessage(null);
     const sendData = {
-      name : data.name,
-      username : data.username,
-      password : data.password,
-      avatar : data.avatar[0],
-    }
-    // console.log(sendData);
+      name: data.name,
+      username: data.username,
+      password: data.password,
+      avatar: avatarImage ? avatarImage : null,
+    };
     httpService
-      .post("/auth/register", sendData , {headers : {"Content-Type" : "multipart/form-data"}})
+      .post("/auth/register", sendData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
       .then((response) => {
-        document.cookie = `id=${response.data.id}`;
-        document.cookie = `token=${response.data.token}`;
-        document.cookie = `blueTick=${response.data.blueTick}`;
-        document.cookie = `name=${response.data.name}`;
-        document.cookie = `username=${response.data.username}`;
-        document.cookie = `avatar=${response.data.avatar ? response.data.avatar : ""}`;
-        document.cookie = `refreshToken=${response.data.refreshToken}`;
+        document.cookie = `token=${response.data.token};path=/`;
+        document.cookie = `refreshToken=${response.data.refreshToken};path=/`;
         dispatch(userLoginSuccess(response.data));
         setLoading(false);
         setErrorMessage(null);
@@ -51,7 +50,7 @@ function Register() {
         setErrorMessage(
           err.response?.data
             ? err.response.data?.message
-            : "Error in login operation"
+            : "There is a problem communicating"
         );
       });
   };
@@ -65,15 +64,13 @@ function Register() {
           <div className="md:flex md:items-center md:justify-center sm:w-auto md:h-full xl:w-2/5 p-8  md:p-10 lg:p-14 sm:rounded-lg md:rounded-none">
             <div className="max-w-md w-full space-y-8">
               <div className="text-center">
-                <h2 className="mt-6 text-3xl font-bold text-white">
-                  Welcom !
-                </h2>
+                <h2 className="mt-6 text-3xl font-bold text-white">Welcom !</h2>
                 {errorMessage ? (
                   <p className="mt-2 text-sm text-red-500">{errorMessage} !</p>
                 ) : (
                   <p className="mt-2 text-sm text-gray-500">
-                    If you have an anuther account, login{" "}
-                    <Link to={"/auth/register"} className="text-gray-400">
+                    If you have an account, log in{" "}
+                    <Link to={"/auth/login"} className="text-gray-400">
                       here
                     </Link>
                   </p>
@@ -89,7 +86,11 @@ function Register() {
               <form
                 className="mt-8 space-y-6"
                 onSubmit={handleSubmit(onSubmit)}>
-                  <input type="file" {...register('avatar')} />
+                <SelectAvatarImage
+                  avatarImage={avatarImage}
+                  setAvatarImage={setAvatarImage}
+                />
+                {/* name */}
                 <LoginFormInput
                   type={"text"}
                   register={register}
@@ -100,6 +101,7 @@ function Register() {
                   name={"name"}
                   label={"Name"}
                 />
+                {/* username */}
                 <LoginFormInput
                   type={"text"}
                   register={register}
@@ -110,8 +112,9 @@ function Register() {
                   name={"username"}
                   label={"Username"}
                 />
+                {/* password */}
                 <LoginFormInput
-                  type={"text"}
+                  type={"password"}
                   register={register}
                   validation={{
                     required: "This field is required",
@@ -120,16 +123,22 @@ function Register() {
                   name={"password"}
                   label={"password"}
                 />
-                {/* <LoginFormInput
-                  type={"text"}
+                {/* confirm password */}
+                <LoginFormInput
+                  type={"password"}
                   register={register}
                   validation={{
                     required: "This field is required",
+                    validate: (value) => {
+                      if (value !== watch("password")) {
+                        return "The entered value does not match the password";
+                      }
+                    },
                   }}
                   error={errors.confirmPassword}
                   name={"confirmPassword"}
                   label={"confirmPassword"}
-                /> */}
+                />
 
                 <div>
                   <button
@@ -140,16 +149,16 @@ function Register() {
                         ? "w-full flex justify-center transition bg-gradient-to-r from-neutral-400 to-neutral-500  hover:bg-gradient-to-l hover:from-neutral-400 hover:to-neutral-500 text-gray-100 p-4  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer duration-500"
                         : "w-full flex justify-center transition bg-gradient-to-r from-blue-400 to-blue-500  hover:bg-gradient-to-l hover:from-blue-400 hover:to-blue-500 text-gray-100 p-4  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer duration-500"
                     }>
-                    Login
+                    Register
                   </button>
                 </div>
               </form>
               <p className="flex flex-col items-center justify-center mt-10 text-center text-md text-gray-500">
-                <span className="text-gray-500">Don't have an account?</span>
+                <span className="text-gray-500">Do you have an account?</span>
                 <Link
-                  to={"/auth/register"}
+                  to={"/auth/login"}
                   className="text-blue-400 no-underline cursor-pointer">
-                  Sign up
+                  Log in
                 </Link>
               </p>
             </div>

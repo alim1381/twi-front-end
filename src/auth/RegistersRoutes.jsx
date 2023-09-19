@@ -8,7 +8,7 @@ function RegistersRoutes({ children }) {
   const cookies = getCookie();
   const isLogged = cookies ? true : false;
 
-  if (userData || isLogged) return <Navigate to={'/'} />;
+  if (userData || isLogged) return <Navigate to={"/"} />;
   if (!userData && !isLogged) return children;
 }
 export default RegistersRoutes;

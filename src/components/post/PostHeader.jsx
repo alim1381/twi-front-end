@@ -6,7 +6,7 @@ function PostHeader({username , name , avatar , createdAt}) {
     <div className="flex flex-shrink-0 p-4 pb-0">
       <a href="#" className="flex-shrink-0 group block">
         <div className="flex items-center">
-          <div>
+          <div className="w-10 h-10">
             <UserAvatar avatar={avatar} />
           </div>
           <div className="ml-3">

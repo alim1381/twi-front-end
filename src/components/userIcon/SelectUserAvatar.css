@@ -1,0 +1,10 @@
+.camera-up {
+  transition: 0.3s all;
+  transition-delay: 0.1s;
+  transform: translateY(+100%);
+}
+.avatar-hover:hover {
+  .camera-up {
+    transform: translateY(0);
+  }
+}

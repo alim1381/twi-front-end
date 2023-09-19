@@ -41,7 +41,7 @@ function PriveteRoutes({ children }) {
       .catch((err) => {
         document.cookie = `token=${cookies.token};max-age=0`
         document.cookie = `refreshToken=${cookies.refreshToken};max-age=0`
-        // navigate("/auth/login" , {state : ''});
+        navigate("/auth/login" , {state : pathname});
       });
   }
 }

@@ -15,7 +15,7 @@ function Login() {
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
-  const {state} = useLocation();
+  const { state } = useLocation();
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
 
