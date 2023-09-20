@@ -1,5 +1,5 @@
 import React from "react";
-import { AiOutlineHome, AiOutlineMessage } from "react-icons/ai";
+import { AiOutlineHome, AiOutlineMessage, AiOutlineSearch } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { Link, useLocation } from "react-router-dom";
@@ -18,9 +18,9 @@ function BottomMenu() {
       icon: <AiOutlineMessage className="h-6 w-6 " />,
     },
     {
-      text: "Profile",
-      path: "/profile",
-      icon: <CgProfile className="h-6 w-6 " />,
+      text: "Search",
+      path: "/search",
+      icon: <AiOutlineSearch className="h-6 w-6 " />,
     },
     {
       text: "Logout",

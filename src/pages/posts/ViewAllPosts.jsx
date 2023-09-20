@@ -11,7 +11,6 @@ function ViewAllPosts() {
   const [lastPost, setLastPost] = useState(null);
   const [allPosts, setAllPosts] = useState([]);
   const [finishedFetch, setFinishedFetch] = useState(false);
-  console.log(allPosts);
 
   const { response, error, loading, getReqApi } = useApi({
     path: `/posts?page=${postPage}`,

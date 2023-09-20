@@ -5,11 +5,9 @@ function Footer() {
     <>
       <div className="flow-root m-6 ">
         <div className="flex-1">
-          <a href="#">
             <p className="text-sm leading-6 font-medium text-gray-500">
               Front and Backend Developer Ali Moayedi
             </p>
-          </a>
         </div>
         <div className="flex-1">
           <a href="https://tailwindcomponents.com/component/twitter-home">

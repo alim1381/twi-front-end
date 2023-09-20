@@ -26,7 +26,7 @@ const router = createBrowserRouter([
         element: <ViewAllPosts />,
       },
       {
-        path: "profile",
+        path: "profile/:id",
         element: <ViewAllPosts />,
       },
       {

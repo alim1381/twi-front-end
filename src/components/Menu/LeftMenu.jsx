@@ -1,11 +1,13 @@
 import React from "react";
-import { AiOutlineHome, AiOutlineMessage } from "react-icons/ai";
+import { AiOutlineHome, AiOutlineMessage, AiOutlineSearch } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { BiLogOut } from "react-icons/bi";
 import { Link, useLocation } from "react-router-dom";
 import UserIconAndName from "./UserIconAndName";
+import { useSelector } from "react-redux";
 function LeftMenu() {
   const { pathname } = useLocation();
+  const {userData} = useSelector(state => state.loginState)
   const listItems = [
     {
       text: "Home",
@@ -19,7 +21,7 @@ function LeftMenu() {
     },
     {
       text: "Profile",
-      path: "/profile",
+      path: `/profile/${userData.id}`,
       icon: <CgProfile color="white" className="mr-4 h-6 w-6 " />,
     },
     {
@@ -37,6 +39,16 @@ function LeftMenu() {
         </a>
       </div>
       <nav className="mt-5 px-2">
+      <Link
+            to={'/search'}
+            className={
+              pathname === "/search"
+                ? "lg:hidden mt-1 group flex items-center px-2 py-2 text-base leading-6 font-semibold rounded-full bg-blue-400 text-white"
+                : "lg:hidden mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-neutral-900"
+            }>
+            <AiOutlineSearch color="white" className="mr-4 h-6 w-6 " />
+            Search
+          </Link>
         {listItems.map((item, index) => (
           <Link
             key={index}

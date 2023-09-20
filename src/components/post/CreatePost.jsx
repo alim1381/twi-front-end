@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 
 function CreatePost() {
   const { userData } = useSelector((state) => state.loginState);
-  console.log(userData);
   return (
     <>
       <div className="flex">
