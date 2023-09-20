@@ -6,12 +6,3 @@ export const httpService = axios.create({
   baseURL: BASE_URL,
 });
 
-// httpService.interceptors.request.use(
-//   (config) => {
-//     config.headers = {
-//       ,
-//     };
-//     return config;
-//   },
-//   (err) => Promise.reject(err)
-// );

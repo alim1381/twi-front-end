@@ -3,5 +3,9 @@
 @tailwind utilities;
 
 body {
-    background-color: #000;
+  background-color: #000;
+  outline: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: #00000000;
 }

@@ -1,21 +1,23 @@
 import React from "react";
 import PostHeader from "./PostHeader";
 import IconsSection from "./IconsSection";
+import { tagHandler } from "../../helper/tagHandler";
 
-function Post() {
+function Post({ author, textBody, updatedAt }) {
+  const  direction = "ضصثقفغعهخحجچپگکمنتالبیسشظطزرذدئو".includes(textBody[0]) ? "rtl" : "ltr"
   return (
     <>
       <PostHeader
-        avatar={null}
-        username={"@alim1381"}
-        name={"Ali Moayedi"}
-        createdAt={"16 April"}
+        avatar={author.avatar ? `${import.meta.env.VITE_STATIC_FILES_URL}${author.avatar}` : null}
+        blueTick={author.blueTick}
+        username={`@${author.username}`}
+        name={author.name}
+        createdAt={updatedAt.split("T")[0]}
       />
-      <div className="pl-16">
+      <div className={"pl-16 pr-7"}>
         <p className="text-base width-auto font-medium text-white flex-shrink">
-          hi <span className="text-blue-400">#twi</span>
+          <div dir={direction} dangerouslySetInnerHTML={{ __html: tagHandler(textBody) }} />
         </p>
-
         <IconsSection />
       </div>
       <hr className="border-gray-600" />
