@@ -1,11 +1,12 @@
 import React from "react";
 import UserAvatar from "../userIcon/UserAvatar";
 import { BsPatchCheckFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
-function PostHeader({username , name , avatar , createdAt , blueTick}) {
+function PostHeader({authorId,username , name , avatar , createdAt , blueTick}) {
   return (
     <div className="flex flex-shrink-0 p-4 pb-0">
-      <a href="#" className="flex-shrink-0 group block">
+      <Link to={`/profile/${authorId}`} className="flex-shrink-0 group block">
         <div className="flex items-center">
           <div className="w-10 h-10">
             <UserAvatar avatar={avatar ? avatar : null} />
@@ -19,7 +20,7 @@ function PostHeader({username , name , avatar , createdAt , blueTick}) {
             </p>
           </div>
         </div>
-      </a>
+      </Link>
     </div>
   );
 }

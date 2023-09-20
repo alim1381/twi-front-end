@@ -6,6 +6,8 @@ import Register from "./pages/register/Register";
 import PriveteRoutes from "./auth/PriveteRoutes";
 import RegistersRoutes from "./auth/RegistersRoutes";
 import Logout from "./pages/logout/Logout";
+import ProfilePage from "./pages/profile/ProfilePage";
+import Error500 from "./components/error/Error500";
 
 const router = createBrowserRouter([
   {
@@ -27,11 +29,15 @@ const router = createBrowserRouter([
       },
       {
         path: "profile/:id",
-        element: <ViewAllPosts />,
+        element: <ProfilePage />,
       },
       {
         path: "logout",
         element: <Logout />,
+      },
+      {
+        path: "/error",
+        element: <Error500 />,
       },
 
       // redirects

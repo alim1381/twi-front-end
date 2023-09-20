@@ -2,12 +2,13 @@ import React from "react";
 import UserAvatar from "../userIcon/UserAvatar";
 import { useSelector } from "react-redux";
 import { BsPatchCheckFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 function UserIconAndName() {
   const { userData } = useSelector((state) => state.loginState);
   return (
     <div className="flex-shrink-0 flex hover:bg-blue-00 rounded-full p-4 mt-6 mr-2">
-      <a href="#" className="flex-shrink-0 group block">
+      <Link to={`/profile/${userData.id}`} className="flex-shrink-0 group block">
         <div className="flex items-center">
           <div className="w-10 h-10">
             <UserAvatar
@@ -27,7 +28,7 @@ function UserIconAndName() {
             </p>
           </div>
         </div>
-      </a>
+      </Link>
     </div>
   );
 }

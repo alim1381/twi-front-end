@@ -15,32 +15,53 @@ function useApi({ method, path, data, header }) {
 
   const getReqApi = () => {
     setLoading(true);
-    httpService[method.toLocaleLowerCase()](path, {
-      headers: {
-        authorization: `bearer ${cookies.token}`,
-      },
-    })
+    setResponse(null);
+    setError(null);
+    const config = header
+      ? {
+          headers: {
+            authorization: `bearer ${cookies.token}`,
+            ...header,
+          },
+        }
+      : {
+          headers: {
+            authorization: `bearer ${cookies.token}`,
+          },
+        };
+    httpService[method.toLocaleLowerCase()](path, config)
       .then((res) => {
         setLoading(false);
         setResponse(res.data);
       })
       .catch((err) => {
         console.log(err);
-        if (err.response.status === 403) {
-          refreshToken()
+        if (err.response && err.response.status === 403) {
+          refreshToken("get");
         } else {
           setLoading(false);
           setError(err);
         }
       });
   };
-  const postReqApi = () => {
+  const postReqApi = (sendData) => {
     setLoading(true);
-    httpService[method.toLocaleLowerCase()](path, data, {
-      headers: {
-        authorization: `bearer ${cookies.token}`,
-      },
-    })
+    setResponse(null);
+    setError(null);
+    const config = header
+      ? {
+          headers: {
+            authorization: `bearer ${cookies.token}`,
+            ...header,
+          },
+        }
+      : {
+          headers: {
+            authorization: `bearer ${cookies.token}`,
+          },
+        };
+
+    httpService[method.toLocaleLowerCase()](path, sendData, config)
       .then((res) => {
         setLoading(false);
         setResponse(res.data);
@@ -52,7 +73,7 @@ function useApi({ method, path, data, header }) {
       });
   };
 
-  const refreshToken = () => {
+  const refreshToken = (backType) => {
     httpService
       .get("/auth/refreshtoken", {
         headers: { refresh: `bearer ${cookies.refreshToken}` },
@@ -60,10 +81,14 @@ function useApi({ method, path, data, header }) {
       .then((res) => {
         document.cookie = `token=${res.data.token};path=/`;
         document.cookie = `refreshToken=${res.data.refreshToken};path=/`;
-        cookies.token = res.data.token
-        cookies.refreshToken = res.data.refreshToken
+        cookies.token = res.data.token;
+        cookies.refreshToken = res.data.refreshToken;
         dispatch(userLoginSuccess(res.data));
-        getReqApi()
+        if (backType === "get") {
+          getReqApi();
+        } else if (backType === "post") {
+          postReqApi();
+        }
       })
       .catch((err) => {
         document.cookie = `token=${cookies.token};path=/;max-age=0`;
@@ -72,15 +97,12 @@ function useApi({ method, path, data, header }) {
         navigate("/auth/login");
       });
   };
-  // useEffect(() => {
-  //   if (method.toLocaleLowerCase() === "get") {
-  //     getReq()
-  //   }
-  //   if (method.toLocaleLowerCase() === "post") {
-  //     postReq()
-  //   }
-  // }, []);
-  return { response, error, loading, getReqApi, postReqApi };
+
+  const clearErrorsState = () => {
+    setError(null);
+  };
+
+  return [response, error, loading, getReqApi, postReqApi, clearErrorsState] ;
 }
 
 export default useApi;

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import CreatePost from "../../components/post/CreatePost";
-import Post from "../../components/post/Post";
+import UserProfile from "../../components/user/UserProfile";
 import useApi from "../../hooks/useApi";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import Loader from "../../components/loader/Loader";
 import InternalLoader from "../../components/loader/InternalLoader";
-import Error500 from "../../components/error/Error500";
+import Post from "../../components/post/Post";
 
-function ViewAllPosts() {
+function ProfilePage() {
+  const { id } = useParams();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [postPage, setPostPage] = useState(1);
@@ -16,7 +17,7 @@ function ViewAllPosts() {
   const [updatePage, setUpdatePage] = useState(0);
 
   const [response, error, loading, getReqApi] = useApi({
-    path: `/posts?page=${postPage}`,
+    path: `/posts/${id}?page=${postPage}`,
     method: "get",
   });
 
@@ -26,7 +27,6 @@ function ViewAllPosts() {
     }
   });
 
-  console.log({ allPosts, finishedFetch, postPage, updatePage });
   useEffect(() => {
     setFinishedFetch(false);
     setPostPage(1);
@@ -67,8 +67,7 @@ function ViewAllPosts() {
 
   return (
     <>
-      <CreatePost setUpdatePage={setUpdatePage} />
-      {error && <Error500 />}
+      <UserProfile id={id} />
       {allPosts.length > 0 &&
         allPosts?.map((post) => (
           <div key={post.id} ref={setLastPost}>
@@ -80,4 +79,4 @@ function ViewAllPosts() {
   );
 }
 
-export default ViewAllPosts;
+export default ProfilePage;
