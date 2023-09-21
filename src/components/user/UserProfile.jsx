@@ -8,6 +8,7 @@ import InternalLoader from "../loader/InternalLoader";
 import { BsPatchCheckFill } from "react-icons/bs";
 import { tagHandler } from "../../helper/tagHandler";
 import { useNavigate } from "react-router-dom";
+import "../side/LoginSide.css";
 
 function UserProfile({ id }) {
   const { userData } = useSelector((state) => state.loginState);
@@ -45,6 +46,19 @@ function UserProfile({ id }) {
       <>
         <div class="p-4">
           <div class="relative flex w-full">
+            {/* background Animation */}
+            <ul className="circles-profile blur">
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
             {/* <!-- Avatar --> */}
             <div class="flex flex-1">
               <div>
@@ -64,7 +78,7 @@ function UserProfile({ id }) {
             </div>
             {/* <!-- Follow Button --> */}
             {userData.id === id && (
-              <div class="flex flex-col-reverse">
+              <div class="flex flex-col-reverse z-30">
                 <button class="justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring max-w-max border bg-transparent border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white transition flex items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto">
                   Edit Profile
                 </button>

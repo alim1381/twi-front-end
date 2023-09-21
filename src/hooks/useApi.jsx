@@ -60,7 +60,6 @@ function useApi({ method, path, data, header }) {
             authorization: `bearer ${cookies.token}`,
           },
         };
-
     httpService[method.toLocaleLowerCase()](path, sendData, config)
       .then((res) => {
         setLoading(false);
@@ -102,7 +101,7 @@ function useApi({ method, path, data, header }) {
     setError(null);
   };
 
-  return [response, error, loading, getReqApi, postReqApi, clearErrorsState] ;
+  return [response, error, loading, getReqApi, postReqApi, clearErrorsState];
 }
 
 export default useApi;
