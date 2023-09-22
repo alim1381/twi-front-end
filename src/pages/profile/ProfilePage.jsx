@@ -9,6 +9,7 @@ import Post from "../../components/post/Post";
 function ProfilePage() {
   const { id } = useParams();
   const { pathname } = useLocation();
+  console.log(pathname);
   const navigate = useNavigate();
   const [postPage, setPostPage] = useState(1);
   const [lastPost, setLastPost] = useState(null);
@@ -31,7 +32,7 @@ function ProfilePage() {
     setFinishedFetch(false);
     setPostPage(1);
     setAllPosts([]);
-  }, [updatePage]);
+  }, [updatePage, pathname]);
 
   useEffect(() => {
     if (!finishedFetch) {

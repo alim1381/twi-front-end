@@ -8,6 +8,7 @@ import RegistersRoutes from "./auth/RegistersRoutes";
 import Logout from "./pages/logout/Logout";
 import ProfilePage from "./pages/profile/ProfilePage";
 import Error500 from "./components/error/Error500";
+import FollowersAndFollowing from "./pages/followersAndFollowing/FollowersAndFollowing";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,14 @@ const router = createBrowserRouter([
       {
         path: "profile/:id",
         element: <ProfilePage />,
+      },
+      {
+        path: "followers/:id",
+        element: <FollowersAndFollowing />,
+      },
+      {
+        path: "following/:id",
+        element: <FollowersAndFollowing />,
       },
       {
         path: "logout",

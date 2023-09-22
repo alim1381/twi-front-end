@@ -3,16 +3,17 @@ import { AiOutlineCalendar } from "react-icons/ai";
 import useApi from "../../hooks/useApi";
 import { useSelector } from "react-redux";
 import UserAvatar from "../userIcon/UserAvatar";
-import Loader from "../loader/Loader";
 import InternalLoader from "../loader/InternalLoader";
 import { BsPatchCheckFill } from "react-icons/bs";
 import { tagHandler } from "../../helper/tagHandler";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../side/LoginSide.css";
+import FAFButton from "../../pages/followersAndFollowing/components/FAFButton";
 
 function UserProfile({ id }) {
   const { userData } = useSelector((state) => state.loginState);
   const [userDetails, setUserDetails] = useState();
+  const [up, setUp] = useState(0);
   const navigate = useNavigate();
   const direction = userDetails
     ? "ضصثقفغعهخحجچپگکمنتالبیسشظطزرذدئو".includes(userDetails.bio)
@@ -26,7 +27,7 @@ function UserProfile({ id }) {
   });
   useEffect(() => {
     getReqApi();
-  }, [id]);
+  }, [id, up]);
   useEffect(() => {
     if (response) {
       setUserDetails(response);
@@ -77,13 +78,15 @@ function UserProfile({ id }) {
               </div>
             </div>
             {/* <!-- Follow Button --> */}
-            {userData.id === id && (
-              <div class="flex flex-col-reverse z-30">
+            <div class="flex flex-col-reverse z-30">
+              {userData.id === id ? (
                 <button class="justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring max-w-max border bg-transparent border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white transition flex items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto">
                   Edit Profile
                 </button>
-              </div>
-            )}
+              ) : (
+                <FAFButton userId={id} setUp={setUp} pathname={"/null"} />
+              )}
+            </div>
           </div>
 
           {/* <!-- Profile info --> */}
@@ -119,6 +122,20 @@ function UserProfile({ id }) {
                     Joined {userDetails.createdAt.split("T")[0]}
                   </span>
                 </span>
+              </div>
+              <div className=" text-gray-600 flex gap-1">
+                <Link to={`/followers/${userDetails._id}`}>
+                  <span className=" text-white font-bold">
+                    {userDetails.followers.length}
+                  </span>{" "}
+                  Followers
+                </Link>
+                <Link to={`/following/${userDetails._id}`} className="ml-3">
+                  <span className=" text-white font-bold">
+                    {userDetails.following.length}
+                  </span>{" "}
+                  Following
+                </Link>
               </div>
             </div>
           </div>
