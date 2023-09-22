@@ -9,6 +9,7 @@ import Logout from "./pages/logout/Logout";
 import ProfilePage from "./pages/profile/ProfilePage";
 import Error500 from "./components/error/Error500";
 import FollowersAndFollowing from "./pages/followersAndFollowing/FollowersAndFollowing";
+import PostComment from "./pages/comment/PostComment";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "following/:id",
         element: <FollowersAndFollowing />,
+      },
+      {
+        path: "comments/:postId",
+        element: <PostComment />,
       },
       {
         path: "logout",

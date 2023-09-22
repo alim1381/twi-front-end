@@ -76,6 +76,7 @@ function ViewAllPosts() {
           </div>
         ))}
       {loading && <InternalLoader />}
+      <hr className="max-sm:h-14 border-none" />
     </>
   );
 }

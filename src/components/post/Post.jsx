@@ -22,12 +22,12 @@ function Post({ _id, likes, author, textBody, updatedAt, image }) {
         createdAt={updatedAt.split("T")[0]}
       />
       <div className={"pl-16 pr-7"}>
-        <p className="text-base width-auto font-medium text-white flex-shrink">
+        <div className="text-base width-auto font-medium text-white flex-shrink">
           <div
             dir={direction}
             dangerouslySetInnerHTML={{ __html: tagHandler(textBody) }}
           />
-        </p>
+        </div>
         {image && (
           <div className="w-full p-3">
             <div className=" rounded-md overflow-hidden w-full bg-neutral-900">

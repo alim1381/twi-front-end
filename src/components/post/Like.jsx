@@ -71,7 +71,7 @@ function Like({ postId }) {
 
   if (likeingLoading || disLikeLoading || getLoading) return <InternalLoader />;
   return (
-    <div className=" text-center py-2 m-2 flex items-center">
+    <div className=" text-center py-2 sm:m-2 flex items-center">
       <div className="w-12 h-12 mt-1 group flex items-center text-gray-500 px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-neutral-800">
         {likersList && likersList.includes(userData.id) ? (
           <AiFillHeart
