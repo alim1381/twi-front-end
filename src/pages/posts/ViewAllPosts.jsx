@@ -26,7 +26,6 @@ function ViewAllPosts() {
     }
   });
 
-  console.log({ allPosts, finishedFetch, postPage, updatePage });
   useEffect(() => {
     setFinishedFetch(false);
     setPostPage(1);

@@ -1,8 +1,9 @@
 import React from "react";
 import UserAvatar from "../userIcon/UserAvatar";
 import FAFButton from "../../pages/followersAndFollowing/components/FAFButton";
+import { BsPatchCheckFill } from "react-icons/bs";
 
-function SearchUserItem({ username, name, avatar, _id , setUp }) {
+function SearchUserItem({ username, name, avatar, _id, setUp , blueTick }) {
   return (
     <>
       <div className="flex justify-between items-center p-3">
@@ -17,14 +18,19 @@ function SearchUserItem({ username, name, avatar, _id , setUp }) {
             />
           </div>
           <div className="ml-3 mt-3">
-            <p className="leading-6 font-medium text-white">{name}</p>
+            <p className="leading-6 font-medium text-white flex items-center gap-1">
+              {name}{" "}
+              {blueTick && (
+                <BsPatchCheckFill className="w-4 h-4 text-blue-400" />
+              )}
+            </p>
             <p className="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
               @{username}
             </p>
           </div>
         </div>
         <div className="">
-        <FAFButton userId={_id} setUp={setUp} pathname={"/null"} />
+          <FAFButton userId={_id} setUp={setUp} pathname={"/null"} />
         </div>
       </div>
     </>

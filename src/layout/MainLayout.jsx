@@ -1,11 +1,11 @@
 import React from "react";
 import Header from "../components/header/header";
 import LeftMenu from "../components/Menu/LeftMenu";
-import SearchUser from "../components/user/SearchUser";
 import Footer from "../components/footer/Footer";
 import { Outlet } from "react-router-dom";
 import BottomMenu from "../components/Menu/BottomMenu";
 import ScrollToTop from "../components/shared/ScrollToTop";
+import SearchPage from "../pages/search/SearchPage";
 
 function MainLayout() {
   return (
@@ -24,7 +24,7 @@ function MainLayout() {
         </div>
         {/* right menu */}
         <div className="w-2/5 h-12 max-lg:hidden">
-          <SearchUser />
+          <SearchPage />
           <Footer />
         </div>
       </div>

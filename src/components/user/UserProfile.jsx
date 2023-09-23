@@ -45,8 +45,8 @@ function UserProfile({ id }) {
   if (userDetails)
     return (
       <>
-        <div class="p-4">
-          <div class="relative flex w-full">
+        <div className="p-4">
+          <div className="relative flex w-full">
             {/* background Animation */}
             <ul className="circles-profile blur">
               <li></li>
@@ -61,9 +61,9 @@ function UserProfile({ id }) {
               <li></li>
             </ul>
             {/* <!-- Avatar --> */}
-            <div class="flex flex-1">
+            <div className="flex flex-1">
               <div>
-                <div class="md h-36 w-36 rounded-full relative avatar">
+                <div className="md h-36 w-36 rounded-full relative avatar">
                   <UserAvatar
                     avatar={
                       userDetails.avatar
@@ -73,14 +73,14 @@ function UserProfile({ id }) {
                         : null
                     }
                   />
-                  <div class="absolute"></div>
+                  <div className="absolute"></div>
                 </div>
               </div>
             </div>
             {/* <!-- Follow Button --> */}
-            <div class="flex flex-col-reverse z-30">
+            <div className="flex flex-col-reverse z-30">
               {userData.id === id ? (
-                <button class="justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring max-w-max border bg-transparent border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white transition flex items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto">
+                <button className="justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring max-w-max border bg-transparent border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white transition flex items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto">
                   Edit Profile
                 </button>
               ) : (
@@ -90,22 +90,22 @@ function UserProfile({ id }) {
           </div>
 
           {/* <!-- Profile info --> */}
-          <div class="space-y-1 justify-center w-full mt-3 ml-3">
+          <div className="space-y-1 justify-center w-full mt-3 ml-3">
             {/* <!-- User basic--> */}
             <div>
-              <h2 class="text-xl leading-6 font-bold text-white flex gap-1 items-center">
+              <h2 className="text-xl leading-6 font-bold text-white flex gap-1 items-center">
                 {userDetails.name}{" "}
                 {userDetails.blueTick && (
                   <BsPatchCheckFill className="w-4 h-4 text-blue-400" />
                 )}
               </h2>
-              <p class="text-sm leading-5 font-medium text-gray-600">
+              <p className="text-sm leading-5 font-medium text-gray-600">
                 @{userDetails.username}
               </p>
             </div>
             {/* <!-- Description and others --> */}
-            <div class="mt-3">
-              <p class="text-white leading-tight mb-2">
+            <div className="mt-3">
+              <p className="text-white leading-tight mb-2">
                 {userDetails.bio && (
                   <div
                     dir={direction}
@@ -115,10 +115,10 @@ function UserProfile({ id }) {
                   />
                 )}
               </p>
-              <div class="text-gray-600 flex">
-                <span class="flex mr-2 items-center">
+              <div className="text-gray-600 flex">
+                <span className="flex mr-2 items-center">
                   <AiOutlineCalendar className="text-gray-400" />
-                  <span class="leading-5 ml-1">
+                  <span className="leading-5 ml-1">
                     Joined {userDetails.createdAt.split("T")[0]}
                   </span>
                 </span>
@@ -140,7 +140,7 @@ function UserProfile({ id }) {
             </div>
           </div>
         </div>
-        <hr class="border-gray-800" />
+        <hr className="border-gray-800" />
       </>
     );
 }
