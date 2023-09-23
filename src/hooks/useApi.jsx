@@ -12,6 +12,9 @@ function useApi({ method, path, data, header }) {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const controller = new AbortController();
+  const signal = controller.signal;
+  const cancelReq = controller.abort;
 
   const getReqApi = () => {
     setLoading(true);
@@ -21,6 +24,7 @@ function useApi({ method, path, data, header }) {
       ? {
           headers: {
             authorization: `bearer ${cookies.token}`,
+            signal: signal,
             ...header,
           },
         }
@@ -52,6 +56,7 @@ function useApi({ method, path, data, header }) {
       ? {
           headers: {
             authorization: `bearer ${cookies.token}`,
+            signal: signal,
             ...header,
           },
         }
@@ -101,7 +106,15 @@ function useApi({ method, path, data, header }) {
     setError(null);
   };
 
-  return [response, error, loading, getReqApi, postReqApi, clearErrorsState];
+  return [
+    response,
+    error,
+    loading,
+    getReqApi,
+    postReqApi,
+    clearErrorsState,
+    cancelReq,
+  ];
 }
 
 export default useApi;

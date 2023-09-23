@@ -10,6 +10,7 @@ import ProfilePage from "./pages/profile/ProfilePage";
 import Error500 from "./components/error/Error500";
 import FollowersAndFollowing from "./pages/followersAndFollowing/FollowersAndFollowing";
 import PostComment from "./pages/comment/PostComment";
+import SearchPage from "./pages/search/SearchPage";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "messages",
         element: <ViewAllPosts />,
+      },
+      {
+        path: "search",
+        element: <SearchPage />,
       },
       {
         path: "profile/:id",
