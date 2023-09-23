@@ -31,7 +31,7 @@ function FollowersAndFollowing() {
       {response &&
         response.map((user) => (
           <UserRow
-          key={user._id}
+            key={user._id}
             pathname={pathname}
             setUp={setUpdatePage}
             userId={user._id}
@@ -45,6 +45,7 @@ function FollowersAndFollowing() {
             name={user.name}
           />
         ))}
+      <hr className="max-sm:h-14 border-none" />
     </>
   );
 }

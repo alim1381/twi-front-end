@@ -3,6 +3,7 @@ import FollowButton from "../../../components/button/FollowButton";
 import FollowingButton from "../../../components/button/FollowingButton";
 import { useSelector } from "react-redux";
 import useApi from "../../../hooks/useApi";
+import { ClipLoader } from "react-spinners";
 
 function FAFButton({ userId, setUp, pathname }) {
   const { userData } = useSelector((state) => state.loginState);
@@ -79,18 +80,29 @@ function FAFButton({ userId, setUp, pathname }) {
       }
     }
   }, [unFollowResponse]);
-  return (
-    <>
-      {userData.id === userId ? (
-        ""
-      ) : loginUserFollowingLists &&
-        loginUserFollowingLists.find((user) => user._id === userId) ? (
-        <FollowingButton onClick={unFollowHandler} />
-      ) : (
-        <FollowButton onClick={followHandler} />
-      )}
-    </>
-  );
+
+  if (followLoading || unFollowLoading || !loginUserFollowingLists)
+    return (
+      <div>
+        <ClipLoader color="#60a5fa" speedMultiplier={0.9} />
+      </div>
+    );
+  if (loginUserFollowingLists)
+    return (
+      <>
+        {userData.id === userId ? (
+          ""
+        ) : loginUserFollowingLists &&
+          loginUserFollowingLists.find((user) => user._id === userId) ? (
+          <FollowingButton
+            loading={unFollowLoading}
+            onClick={unFollowHandler}
+          />
+        ) : (
+          <FollowButton loading={followLoading} onClick={followHandler} />
+        )}
+      </>
+    );
 }
 
 export default FAFButton;
