@@ -11,6 +11,8 @@ import Error500 from "./components/error/Error500";
 import FollowersAndFollowing from "./pages/followersAndFollowing/FollowersAndFollowing";
 import PostComment from "./pages/comment/PostComment";
 import SearchPage from "./pages/search/SearchPage";
+import AllChatsPage from "./pages/chats/AllChatsPage";
+import OneChatPage from "./pages/chats/OneChatPage";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +30,11 @@ const router = createBrowserRouter([
       },
       {
         path: "messages",
-        element: <ViewAllPosts />,
+        element: <AllChatsPage />,
+      },
+      {
+        path: "messages/:chatId",
+        element: <OneChatPage />,
       },
       {
         path: "search",

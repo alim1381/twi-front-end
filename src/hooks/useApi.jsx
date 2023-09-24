@@ -9,7 +9,9 @@ function useApi({ method, path, data, header }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cookies = getCookie();
+
   const [response, setResponse] = useState(null);
+  const [reSend, setResend] = useState(0);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const controller = new AbortController();
@@ -71,9 +73,12 @@ function useApi({ method, path, data, header }) {
         setResponse(res.data);
       })
       .catch((err) => {
-        console.log(err);
-        setLoading(false);
-        setError(err);
+        if (err.response && err.response.status === 403) {
+          refreshToken("get");
+        } else {
+          setLoading(false);
+          setError(err);
+        }
       });
   };
 
@@ -88,10 +93,19 @@ function useApi({ method, path, data, header }) {
         cookies.token = res.data.token;
         cookies.refreshToken = res.data.refreshToken;
         dispatch(userLoginSuccess(res.data));
-        if (backType === "get") {
-          getReqApi();
-        } else if (backType === "post") {
-          postReqApi();
+        if (reSend < 2) {
+          if (backType === "get") {
+            setResend((prev) => prev + 1);
+            getReqApi();
+          } else if (backType === "post") {
+            setResend((prev) => prev + 1);
+            postReqApi();
+          }
+        } else {
+          document.cookie = `token=${cookies.token};path=/;max-age=0`;
+          document.cookie = `refreshToken=${cookies.refreshToken};path=/;max-age=0`;
+          dispatch(userLoginSuccess(null));
+          navigate("/auth/login");
         }
       })
       .catch((err) => {
