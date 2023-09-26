@@ -13,6 +13,7 @@ import PostComment from "./pages/comment/PostComment";
 import SearchPage from "./pages/search/SearchPage";
 import AllChatsPage from "./pages/chats/AllChatsPage";
 import OneChatPage from "./pages/chats/OneChatPage";
+import TagPage from "./pages/tag/TagPage";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "comments/:postId",
         element: <PostComment />,
+      },
+      {
+        path: "tag/:tag",
+        element: <TagPage />,
       },
       {
         path: "logout",
