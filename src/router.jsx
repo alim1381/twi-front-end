@@ -14,6 +14,8 @@ import SearchPage from "./pages/search/SearchPage";
 import AllChatsPage from "./pages/chats/AllChatsPage";
 import OneChatPage from "./pages/chats/OneChatPage";
 import TagPage from "./pages/tag/TagPage";
+import ChangePass from "./pages/changePass/ChangePass";
+import EditProfile from "./pages/editProfile/EditProfile";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +46,14 @@ const router = createBrowserRouter([
       {
         path: "profile/:id",
         element: <ProfilePage />,
+      },
+      {
+        path: "editprofile",
+        element: <EditProfile />,
+      },
+      {
+        path: "changepass",
+        element: <ChangePass />,
       },
       {
         path: "followers/:id",

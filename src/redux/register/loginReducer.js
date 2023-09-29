@@ -8,6 +8,15 @@ const loginReducer = (state = initialState, action) => {
       return {
         userData: action.payload,
       };
+
+    case "UPDATE_USER_DATA":
+      return {
+        userData: {
+          ...state.userData,
+          name: action.payload.name,
+          avatar: action.payload.avatar,
+        },
+      };
     default:
       return state;
   }

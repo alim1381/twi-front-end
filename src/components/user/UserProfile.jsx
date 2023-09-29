@@ -80,9 +80,18 @@ function UserProfile({ id }) {
             {/* <!-- Follow Button --> */}
             <div className="flex flex-col-reverse z-30">
               {userData.id === id ? (
-                <button className="justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring max-w-max border bg-transparent border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white transition flex items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto">
-                  Edit Profile
-                </button>
+                <div className=" flex flex-col items-center">
+                  <Link
+                    to={"/editprofile"}
+                    className="justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring max-w-max border bg-transparent border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white transition flex items-center hover:shadow-lg font-bold py-2 px-4 rounded-full">
+                    Edit Profile
+                  </Link>
+                  <Link
+                    to={"/changepass"}
+                    className="justify-center transition text-gray-500 hover:text-white whitespace-nowrap focus:outline-none  flex items-center text-sm font-bold py-2 px-2 rounded-full mr-0 ml-auto">
+                    Change Password
+                  </Link>
+                </div>
               ) : (
                 <FAFButton userId={id} setUp={setUp} pathname={"/null"} />
               )}

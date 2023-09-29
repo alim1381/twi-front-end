@@ -5,4 +5,11 @@ const userLoginSuccess = (data) => {
   };
 };
 
-export { userLoginSuccess };
+const updateUserData = (data) => {
+  return {
+    type: "UPDATE_USER_DATA",
+    payload: data,
+  };
+};
+
+export { userLoginSuccess , updateUserData };
