@@ -2,12 +2,13 @@ import React from "react";
 import UserAvatar from "../userIcon/UserAvatar";
 import FAFButton from "../../pages/followersAndFollowing/components/FAFButton";
 import { BsPatchCheckFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 function SearchUserItem({ username, name, avatar, _id, setUp , blueTick }) {
   return (
     <>
       <div className="flex justify-between items-center p-3">
-        <div className="flex items-center justify-center">
+        <Link to={`/profile/${_id}`} className="flex items-center justify-center">
           <div className="h-10 w-10">
             <UserAvatar
               avatar={
@@ -28,7 +29,7 @@ function SearchUserItem({ username, name, avatar, _id, setUp , blueTick }) {
               @{username}
             </p>
           </div>
-        </div>
+        </Link>
         <div className="">
           <FAFButton userId={_id} setUp={setUp} pathname={"/null"} />
         </div>

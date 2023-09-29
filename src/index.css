@@ -9,3 +9,28 @@ body {
   -webkit-user-select: none;
   -webkit-tap-highlight-color: #00000000;
 }
+
+/* width */
+.sc::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.sc::-webkit-scrollbar-track {
+  background: none;
+}
+
+/* Handle */
+.sc::-webkit-scrollbar-thumb {
+  background: #505050;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+.sc::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.rev {
+  flex-direction: column-reverse;
+}

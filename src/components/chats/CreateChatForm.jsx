@@ -37,7 +37,12 @@ function CreateChatForm({ _id, close }) {
         </button>
         <button
           onClick={sendHandler}
-          className="m-1 w-full border border-blue-400 rounded-lg hover:bg-blue-400">
+          disabled={text && _id ? false : true}
+          className={
+            text && _id
+              ? "m-1 w-full border border-blue-400 rounded-lg hover:bg-blue-400"
+              : "m-1 w-full border border-neutral-800 text-neutral-800 rounded-lg"
+          }>
           Send
         </button>
       </div>

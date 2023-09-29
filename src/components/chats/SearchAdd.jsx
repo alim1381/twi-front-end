@@ -2,8 +2,10 @@ import React from "react";
 import UserAvatar from "../userIcon/UserAvatar";
 import FAFButton from "../../pages/followersAndFollowing/components/FAFButton";
 import { BsPatchCheckFill } from "react-icons/bs";
+import { useSelector } from "react-redux";
 
-function SearchAdd({ username, name, avatar, _id, setUp, blueTick , setUser }) {
+function SearchAdd({ username, name, avatar, _id, setUp, blueTick, setUser }) {
+  const { userData } = useSelector((state) => state.loginState);
   return (
     <>
       <div className="flex justify-between items-center p-3">
@@ -30,13 +32,15 @@ function SearchAdd({ username, name, avatar, _id, setUp, blueTick , setUser }) {
           </div>
         </div>
         <div className="">
-          <button
-            onClick={() => setUser(_id)}
-            className={
+          {userData.id !== _id && (
+            <button
+              onClick={() => setUser(_id)}
+              className={
                 " h-fit p-1 px-2 rounded-md font-bold text-gray-900 hover:bg-neutral-200 bg-white"
-            }>
-            Chat
-          </button>
+              }>
+              Chat
+            </button>
+          )}
         </div>
       </div>
     </>

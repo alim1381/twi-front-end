@@ -21,9 +21,12 @@ function OneChatPage() {
   const [up, setUp] = useState();
 
   const [text, setText] = useState("");
-  const url = `ws://localhost:3000/chat/${chatId}/${cookies.token}`;
+  const url = `ws://87.248.155.164:3000/chat/${chatId}/${cookies.token}`;
 
-  const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(url);
+  const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(
+    url,
+    "echo-protocol"
+  );
 
   const [allChatsRes, allChatsErr, allChatsLoading, getAllChats] = useApi({
     method: "get",
@@ -33,11 +36,7 @@ function OneChatPage() {
   useEffect(() => {
     if (lastJsonMessage !== null) {
       setMessages((prev) => prev.concat(lastJsonMessage));
-      box.current.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "start",
-      });
+      scrollToBottom()
     }
   }, [lastJsonMessage]);
 
@@ -54,40 +53,49 @@ function OneChatPage() {
   useEffect(() => {
     getAllChats();
   }, []);
-  
+
   useEffect(() => {
     if (allChatsRes) {
       setAllChats(allChatsRes.messages);
       setProfile(
         userData.id === allChatsRes.profiles.firstUser._id
-        ? allChatsRes.profiles.secondUser
-        : allChatsRes.profiles.firstUser
-        );
-      }
-    }, [allChatsRes]);
-    
-    const sendHandler = () => {
-      if (text) {
-        sendJsonMessage({
-          text: text,
-          senderId: userData.id,
-          receiverId: profile._id,
-          chatListId: location.pathname.split("/")[1],
-        });
-      }
-    };
-    
-    if (allChatsLoading)
+          ? allChatsRes.profiles.secondUser
+          : allChatsRes.profiles.firstUser
+      );
+    }
+  }, [allChatsRes]);
+
+  const sendHandler = () => {
+    scrollToBottom()
+    if (text) {
+      sendJsonMessage({
+        text: text,
+        senderId: userData.id,
+        receiverId: profile._id,
+        chatListId: location.pathname.split("/")[1],
+      });
+    }
+  };
+  const messagesEndRef = useRef(null)
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  if (allChatsLoading)
     return (
-  <div className=" max-h-[100vh] flex items-center justify-center">
+      <div className=" max-h-[100vh] flex items-center justify-center">
         <InternalLoader />
       </div>
     );
   return (
-    <div ref={box} className=" relative h-[90vh] overflow-y-scroll">
+    <div ref={box} className=" relative h-[90vh] overflow-y-scroll sc">
+        <div ref={messagesEndRef} />
       {profile && <UserDetails user={profile} />}
-      {allChats.length > 0 &&
-        allChats.map((chat) => <Chat key={chat._id} {...chat} />)}
+        <button className="text-white" onClick={() => scrollToBottom()} >Yeeeesss</button>
+      <div className=" w-full    flex flex-col-reverse">
+        {allChats.length > 0 &&
+          allChats.map((chat) => <div ref={messagesEndRef}><Chat key={chat._id} {...chat} /></div>)}
+      </div>
       <ChatInput sendHandler={sendHandler} text={text} setText={setText} />
     </div>
   );

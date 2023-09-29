@@ -38,7 +38,7 @@ export function SearchUserForChat({ searchUsername , setUser }) {
   }, [searchUsername]);
   return (
     <div className="w-full p-5">
-      <div className="rounded-lg bg-neutral-900 h-20 overflow-hidden shadow-lg">
+      <div className="rounded-lg bg-neutral-900 h-20 overflow-y-scroll sc shadow-lg">
         {searchLoading ? (
           <InternalLoader />
         ) : (

@@ -93,7 +93,7 @@ function Login() {
                   label={"Username"}
                 />
                 <LoginFormInput
-                  type={"text"}
+                  type={"password"}
                   register={register}
                   validation={{
                     required: "This field is required",
