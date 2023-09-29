@@ -47,13 +47,13 @@ function ChangePass() {
 
   return (
     <div className=" flex flex-col items-center">
-      <h2 className="mt-6 text-3xl font-bold text-white">Change Password</h2>
+      <h2 className="mt-6 text-3xl font-bold text-white text-center">Change Password</h2>
       {changePassRes ? (
-        <p className="mt-2 text-sm text-green-500">
+        <p className="mt-2 text-sm max-w-sm p-1 text-center text-green-500">
           Changed password successfully. Transferring to login page...
         </p>
       ) : (
-        <p className="mt-2 text-sm text-gray-500">
+        <p className="mt-2 text-sm max-w-sm p-1 text-center text-gray-500">
           You can change your password by entering the previous password
         </p>
       )}

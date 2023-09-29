@@ -13,7 +13,6 @@ function OneChatPage() {
   const { chatId } = useParams();
   const { userData } = useSelector((state) => state.loginState);
   const cookies = getCookie();
-  const box = useRef();
 
   const [messages, setMessages] = useState([]);
   const [allChats, setAllChats] = useState([]);
@@ -21,12 +20,9 @@ function OneChatPage() {
   const [up, setUp] = useState();
 
   const [text, setText] = useState("");
-  const url = `ws://87.248.155.164:3000/chat/${chatId}/${cookies.token}`;
+  const url = `ws://87.248.155.164:443/chat/${chatId}/${cookies.token}`;
 
-  const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(
-    url,
-    "echo-protocol"
-  );
+  const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(url);
 
   const [allChatsRes, allChatsErr, allChatsLoading, getAllChats] = useApi({
     method: "get",
@@ -36,7 +32,6 @@ function OneChatPage() {
   useEffect(() => {
     if (lastJsonMessage !== null) {
       setMessages((prev) => prev.concat(lastJsonMessage));
-      scrollToBottom()
     }
   }, [lastJsonMessage]);
 
@@ -48,6 +43,10 @@ function OneChatPage() {
       setText("");
     }
     setUp((prev) => prev + 1);
+    scrollToBottom();
+    setTimeout(() => {
+      scrollToBottom();
+    }, 500);
   }, [lastJsonMessage]);
 
   useEffect(() => {
@@ -62,11 +61,15 @@ function OneChatPage() {
           ? allChatsRes.profiles.secondUser
           : allChatsRes.profiles.firstUser
       );
+      scrollToBottom();
+      setTimeout(() => {
+        scrollToBottom();
+      }, 300);
     }
   }, [allChatsRes]);
 
   const sendHandler = () => {
-    scrollToBottom()
+    scrollToBottom();
     if (text) {
       sendJsonMessage({
         text: text,
@@ -76,10 +79,10 @@ function OneChatPage() {
       });
     }
   };
-  const messagesEndRef = useRef(null)
+  const messagesEndRef = useRef(null);
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   if (allChatsLoading)
     return (
@@ -88,16 +91,17 @@ function OneChatPage() {
       </div>
     );
   return (
-    <div ref={box} className=" relative h-[90vh] overflow-y-scroll sc">
+    <>
+      <div className=" relative h-[80vh] overflow-y-scroll sc">
+        {profile && <UserDetails user={profile} />}
+        <div className=" w-full    flex flex-col-reverse  ">
+          {allChats.length > 0 &&
+            allChats.map((chat) => <Chat key={chat._id} {...chat} />)}
+        </div>
         <div ref={messagesEndRef} />
-      {profile && <UserDetails user={profile} />}
-        <button className="text-white" onClick={() => scrollToBottom()} >Yeeeesss</button>
-      <div className=" w-full    flex flex-col-reverse">
-        {allChats.length > 0 &&
-          allChats.map((chat) => <div ref={messagesEndRef}><Chat key={chat._id} {...chat} /></div>)}
       </div>
       <ChatInput sendHandler={sendHandler} text={text} setText={setText} />
-    </div>
+    </>
   );
 }
 

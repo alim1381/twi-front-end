@@ -83,13 +83,13 @@ function EditProfile() {
     return (
       <div className=" flex flex-col items-center">
         {(fetchProfileLoading || editProfileLoading) && <InternalLoader />}
-        <h2 className="mt-6 text-3xl font-bold text-white">Edit Profile</h2>
+        <h2 className="mt-6 text-3xl font-bold text-white text-center">Edit Profile</h2>
         {editProfileRes ? (
-          <p className="mt-2 text-sm text-green-500">
+          <p className="mt-2 text-sm max-w-sm p-1 text-center text-green-500">
             Edit Profile successfully. Transferring to login page...
           </p>
         ) : (
-          <p className="mt-2 text-sm text-gray-500">
+          <p className="mt-2 text-sm max-w-sm p-1 text-center text-gray-500">
             You can change your Profile Information
           </p>
         )}
