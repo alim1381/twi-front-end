@@ -20,7 +20,7 @@ function OneChatPage() {
   const [up, setUp] = useState();
 
   const [text, setText] = useState("");
-  const url = `ws://87.248.155.164:443/chat/${chatId}/${cookies.token}`;
+  const url = `wss://twi-backend.ir:443/chat/${chatId}/${cookies.token}`;
 
   const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(url);
 
@@ -31,16 +31,26 @@ function OneChatPage() {
 
   useEffect(() => {
     if (lastJsonMessage !== null) {
-      setMessages((prev) => prev.concat(lastJsonMessage));
+      if (
+        lastJsonMessage.senderId._id === userData.id ||
+        lastJsonMessage.senderId._id === profile._id
+      ) {
+        setMessages((prev) => prev.concat(lastJsonMessage));
+      }
     }
   }, [lastJsonMessage]);
 
   useEffect(() => {
     if (lastJsonMessage !== null) {
-      const arry = allChats;
-      arry.unshift(lastJsonMessage);
-      setAllChats(arry);
-      setText("");
+      if (
+        lastJsonMessage.senderId._id === userData.id ||
+        lastJsonMessage.senderId._id === profile._id
+      ) {
+        const arry = allChats;
+        arry.unshift(lastJsonMessage);
+        setAllChats(arry);
+        setText("");
+      }
     }
     setUp((prev) => prev + 1);
     scrollToBottom();

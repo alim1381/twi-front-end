@@ -18,10 +18,13 @@ function TagPage() {
   if (postsRes)
     return (
       <>
-      <h2 className=" text-white font-bold text-center p-2">Tag <span className=" text-blue-400">{`#${tag}`}</span></h2>
+        <h2 className=" text-white font-bold text-center p-2">
+          Tag <span className=" text-blue-400">{`#${tag}`}</span>
+        </h2>
         {postsRes.map((post) => (
           <Post key={post._id} {...post} />
         ))}
+        <hr className="max-sm:h-14 border-none" />
       </>
     );
 }
