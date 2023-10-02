@@ -8,6 +8,7 @@ import InternalLoader from "../../components/loader/InternalLoader";
 import ChatInput from "./ChatInput";
 import { getCookie } from "../../helper/getCookie";
 import useWebSocket from "react-use-websocket";
+import SendingChat from "./SendingChat";
 
 function OneChatPage() {
   const { chatId } = useParams();
@@ -18,9 +19,11 @@ function OneChatPage() {
   const [allChats, setAllChats] = useState([]);
   const [profile, setProfile] = useState(null);
   const [up, setUp] = useState();
+  const [sendigMsg, setSendigMsg] = useState(null);
 
   const [text, setText] = useState("");
   const url = `wss://twi-backend.ir:443/chat/${chatId}/${cookies.token}`;
+  // const url = `ws://localhost:443/chat/${chatId}/${cookies.token}`;
 
   const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(url);
 
@@ -35,6 +38,7 @@ function OneChatPage() {
         lastJsonMessage.senderId._id === userData.id ||
         lastJsonMessage.senderId._id === profile._id
       ) {
+        setSendigMsg(null);
         setMessages((prev) => prev.concat(lastJsonMessage));
       }
     }
@@ -46,6 +50,7 @@ function OneChatPage() {
         lastJsonMessage.senderId._id === userData.id ||
         lastJsonMessage.senderId._id === profile._id
       ) {
+        setSendigMsg(null);
         const arry = allChats;
         arry.unshift(lastJsonMessage);
         setAllChats(arry);
@@ -80,7 +85,11 @@ function OneChatPage() {
 
   const sendHandler = () => {
     scrollToBottom();
+    setTimeout(() => {
+      scrollToBottom();
+    }, 300);
     if (text) {
+      setSendigMsg(text);
       sendJsonMessage({
         text: text,
         senderId: userData.id,
@@ -103,8 +112,9 @@ function OneChatPage() {
   return (
     <>
       <div className=" relative h-[80vh] overflow-y-scroll sc">
-        {profile && <UserDetails user={profile} />}
+        {profile && <UserDetails readyState={readyState} user={profile} />}
         <div className=" w-full    flex flex-col-reverse  ">
+          {sendigMsg && <SendingChat text={sendigMsg} />}
           {allChats.length > 0 &&
             allChats.map((chat) => <Chat key={chat._id} {...chat} />)}
         </div>

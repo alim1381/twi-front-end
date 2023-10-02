@@ -74,6 +74,12 @@ function ViewAllPosts() {
             <Post {...post} />
           </div>
         ))}
+      {allPosts.length === 0 && (
+        <div className=" w-full text-center p-3 ">
+          <h2 className=" text-gray-400 font-bold">Your followers have no posts to view!</h2>
+          <span className=" text-gray-500 ">Follow another user to see new posts</span>
+        </div>
+      )}
       {loading && <InternalLoader />}
       <hr className="max-sm:h-14 border-none" />
     </>
