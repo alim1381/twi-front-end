@@ -29,7 +29,10 @@ function Post({ _id, likes, author, textBody, updatedAt, image }) {
           />
         </div>
         {image && (
-          <a href={`${import.meta.env.VITE_STATIC_FILES_URL}${image}`} target="_blanck" className="w-full p-3">
+          <a
+            href={`${import.meta.env.VITE_STATIC_FILES_URL}${image}`}
+            target="_blanck"
+            className="w-full p-3">
             <div className=" rounded-md overflow-hidden w-full bg-neutral-900">
               <img
                 className="w-full"

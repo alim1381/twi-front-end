@@ -5,6 +5,7 @@ import { FiImage } from "react-icons/fi";
 import { useForm } from "react-hook-form";
 import useApi from "../../hooks/useApi";
 import InternalLoader from "../loader/InternalLoader";
+import sanitizeHtml from 'sanitize-html';
 
 function CreatePost({ setUpdatePage }) {
   const { userData } = useSelector((state) => state.loginState);
@@ -24,9 +25,10 @@ function CreatePost({ setUpdatePage }) {
 
   const onSubmit = (data) => {
     const sendData = {
-      ...data,
+      textBody : sanitizeHtml(data.textBody),
       image: postImage,
     };
+    console.log(sendData);
     postReqApi(sendData);
   };
 
