@@ -22,7 +22,7 @@ function OneChatPage() {
   const [sendigMsg, setSendigMsg] = useState(null);
 
   const [text, setText] = useState("");
-  const url = `wss://twi-backend.ir:443/chat/${chatId}/${cookies.token}`;
+  const url = `wss://twi-front-end.vercel.app/chat/${chatId}/${cookies.token}`;
   // const url = `ws://localhost:443/chat/${chatId}/${cookies.token}`;
 
   const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(url);
