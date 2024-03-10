@@ -14,7 +14,7 @@ function CommentBox({ _id, authorId, text, updatedAt }) {
         authorId={authorId._id}
         avatar={
           authorId.avatar
-            ? `${import.meta.env.VITE_STATIC_FILES_URL}${authorId.avatar}`
+            ? `${authorId.avatar}`
             : null
         }
         blueTick={authorId.blueTick}

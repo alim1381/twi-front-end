@@ -100,9 +100,7 @@ function EditProfile() {
               {lastAvatar ? (
                 <label htmlFor="avatar" className="w-20 h-20">
                   <UserAvatar
-                    avatar={`${
-                      import.meta.env.VITE_STATIC_FILES_URL
-                    }${lastAvatar}`}
+                    avatar={`${lastAvatar}`}
                   />
                 </label>
               ) : (

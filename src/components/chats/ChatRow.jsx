@@ -26,7 +26,7 @@ function ChatRow({ user, chatId }) {
             <UserAvatar
               avatar={
                 user.avatar
-                  ? `${import.meta.env.VITE_STATIC_FILES_URL}${user.avatar}`
+                  ? `${user.avatar}`
                   : null
               }
             />

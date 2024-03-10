@@ -14,7 +14,7 @@ function UserIconAndName() {
             <UserAvatar
               avatar={
                 userData.avatar
-                  ? `${import.meta.env.VITE_STATIC_FILES_URL}${userData.avatar}`
+                  ? `${userData.avatar}`
                   : null
               }
             />

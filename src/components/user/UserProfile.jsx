@@ -67,7 +67,7 @@ function UserProfile({ id }) {
                   <UserAvatar
                     avatar={
                       userDetails.avatar
-                        ? `${import.meta.env.VITE_STATIC_FILES_URL}${
+                        ? `${
                             userDetails.avatar
                           }`
                         : null

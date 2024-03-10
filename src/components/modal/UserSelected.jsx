@@ -17,7 +17,7 @@ function UserSelected({ _id }) {
           <UserAvatar
             avatar={
               userRes.avatar
-                ? `${import.meta.env.VITE_STATIC_FILES_URL}${userRes.avatar}`
+                ? `${userRes.avatar}`
                 : null
             }
           />

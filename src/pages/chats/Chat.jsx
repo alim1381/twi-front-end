@@ -13,7 +13,7 @@ function Chat({ senderId, text, updatedAt }) {
             <UserAvatar
               avatar={
                 senderId.avatar
-                  ? `${import.meta.env.VITE_STATIC_FILES_URL}${senderId.avatar}`
+                  ? `${senderId.avatar}`
                   : null
               }
             />
@@ -35,7 +35,7 @@ function Chat({ senderId, text, updatedAt }) {
             <UserAvatar
               avatar={
                 senderId.avatar
-                  ? `${import.meta.env.VITE_STATIC_FILES_URL}${senderId.avatar}`
+                  ? `${senderId.avatar}`
                   : null
               }
             />

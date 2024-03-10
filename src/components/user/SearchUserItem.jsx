@@ -13,7 +13,7 @@ function SearchUserItem({ username, name, avatar, _id, setUp , blueTick }) {
             <UserAvatar
               avatar={
                 avatar
-                  ? `${import.meta.env.VITE_STATIC_FILES_URL}${avatar}`
+                  ? `${avatar}`
                   : null
               }
             />

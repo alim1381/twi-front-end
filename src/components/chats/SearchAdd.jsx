@@ -14,7 +14,7 @@ function SearchAdd({ username, name, avatar, _id, setUp, blueTick, setUser }) {
             <UserAvatar
               avatar={
                 avatar
-                  ? `${import.meta.env.VITE_STATIC_FILES_URL}${avatar}`
+                  ? `${avatar}`
                   : null
               }
             />
